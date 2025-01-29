@@ -47,6 +47,29 @@ public class Cancion {
             inverseJoinColumns = @JoinColumn(name = "playlist_id"))
     private Set<Playlist> playlists = new LinkedHashSet<>();
 
+    public Cancion() {
+    }
+
+    public Cancion(Integer id, String titulo, Integer duracion, String urlcancion, Artista artistaid, Album albumid, Set<Playlist> playlists) {
+        this.id = id;
+        this.titulo = titulo;
+        this.duracion = duracion;
+        this.urlcancion = urlcancion;
+        this.artistaid = artistaid;
+        this.albumid = albumid;
+        this.playlists = playlists;
+    }
+
+    public Cancion(String titulo, Integer duracion, String urlcancion, Artista artistaid, Album albumid) {
+        this.titulo = titulo;
+        this.duracion = duracion;
+        this.urlcancion = urlcancion;
+        this.artistaid = artistaid;
+        this.albumid = albumid;
+    }
+
+
+
     public Integer getId() {
         return id;
     }

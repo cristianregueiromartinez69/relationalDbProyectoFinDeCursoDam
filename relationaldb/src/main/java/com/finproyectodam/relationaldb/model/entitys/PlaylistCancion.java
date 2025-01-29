@@ -22,6 +22,17 @@ public class PlaylistCancion {
     @JoinColumn(name = "cancion_id", nullable = false)
     private Cancion cancion;
 
+    public PlaylistCancion(PlaylistCancionId id, Playlist playlist, Cancion cancion) {
+        this.id = id;
+        this.playlist = playlist;
+        this.cancion = cancion;
+    }
+
+    public PlaylistCancion() {
+
+    }
+
+
     public PlaylistCancionId getId() {
         return id;
     }

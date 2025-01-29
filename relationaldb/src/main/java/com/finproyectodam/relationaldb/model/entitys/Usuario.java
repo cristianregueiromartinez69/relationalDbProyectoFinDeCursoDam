@@ -40,6 +40,34 @@ public class Usuario {
     @OneToMany(mappedBy = "userid")
     private Set<Playlist> playlists = new LinkedHashSet<>();
 
+    public Usuario() {
+
+    }
+
+    public Usuario(Integer id, String username, String email, String passwordU, LocalDate dateReg, Set<Playlist> playlists) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.passwordU = passwordU;
+        this.dateReg = dateReg;
+        this.playlists = playlists;
+    }
+
+    public Usuario(String username, String email, String passwordU, LocalDate dateReg, Set<Playlist> playlists) {
+        this.username = username;
+        this.email = email;
+        this.passwordU = passwordU;
+        this.dateReg = dateReg;
+        this.playlists = playlists;
+    }
+
+    public Usuario(String username, String email, String passwordU, LocalDate dateReg) {
+        this.username = username;
+        this.email = email;
+        this.passwordU = passwordU;
+        this.dateReg = dateReg;
+    }
+
     public Integer getId() {
         return id;
     }

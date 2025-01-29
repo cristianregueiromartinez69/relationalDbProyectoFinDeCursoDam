@@ -37,6 +37,33 @@ public class Artista {
     @OneToMany(mappedBy = "artistaid")
     private Set<Cancion> canciones = new LinkedHashSet<>();
 
+    public Artista(Integer id, String nameart, String generoMusc, String descrip, Set<Album> albumes, Set<Cancion> canciones) {
+        this.id = id;
+        this.nameart = nameart;
+        this.generoMusc = generoMusc;
+        this.descrip = descrip;
+        this.albumes = albumes;
+        this.canciones = canciones;
+    }
+
+    public Artista(String nameart, String generoMusc, String descrip) {
+        this.nameart = nameart;
+        this.generoMusc = generoMusc;
+        this.descrip = descrip;
+    }
+
+    public Artista(String nameart, String generoMusc, String descrip, Set<Album> albumes, Set<Cancion> canciones) {
+        this.nameart = nameart;
+        this.generoMusc = generoMusc;
+        this.descrip = descrip;
+        this.albumes = albumes;
+        this.canciones = canciones;
+    }
+
+    public Artista() {
+
+    }
+
     public Integer getId() {
         return id;
     }

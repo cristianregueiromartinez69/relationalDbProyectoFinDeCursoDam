@@ -25,7 +25,7 @@ public class Album {
 
     @NotNull
     @Column(name = "\"añolanz\"", nullable = false)
-    private Integer añolanz;
+    private Integer anolanz;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -35,6 +35,30 @@ public class Album {
     @OneToMany(mappedBy = "albumid")
     private Set<Cancion> canciones = new LinkedHashSet<>();
 
+    public Album(Integer id, String titulo, Integer anolanz, Artista artistaid, Set<Cancion> canciones) {
+        this.id = id;
+        this.titulo = titulo;
+        this.anolanz = anolanz;
+        this.artistaid = artistaid;
+        this.canciones = canciones;
+    }
+
+    public Album(String titulo, Integer anolanz, Artista artistaid) {
+        this.titulo = titulo;
+        this.anolanz = anolanz;
+        this.artistaid = artistaid;
+    }
+
+    public Album(String titulo, Integer anolanz, Artista artistaid, Set<Cancion> canciones) {
+        this.titulo = titulo;
+        this.anolanz = anolanz;
+        this.artistaid = artistaid;
+        this.canciones = canciones;
+    }
+
+    public Album() {
+
+    }
 
 
     public Integer getId() {
@@ -53,12 +77,12 @@ public class Album {
         this.titulo = titulo;
     }
 
-    public Integer getAñolanz() {
-        return añolanz;
+    public Integer getAnolanz() {
+        return anolanz;
     }
 
-    public void setAñolanz(Integer añolanz) {
-        this.añolanz = añolanz;
+    public void setAnolanz(Integer anolanz) {
+        this.anolanz = anolanz;
     }
 
     public Artista getArtistaid() {
