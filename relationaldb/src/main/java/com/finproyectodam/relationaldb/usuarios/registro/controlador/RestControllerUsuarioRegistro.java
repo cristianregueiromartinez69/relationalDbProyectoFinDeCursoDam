@@ -24,6 +24,7 @@ public class RestControllerUsuarioRegistro {
             usuarioregistroServicio.registroUsuario(usuarioDTO);
             return ResponseEntity.ok("usuario registrado exitosamente");
         }catch (Exception e){
+            e.printStackTrace();
             return new ResponseEntity<>("Ups, ha ocurrido un error a la hora de realizar el registro", HttpStatus.BAD_REQUEST);
         }
     }

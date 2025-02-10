@@ -10,6 +10,5 @@ public class RelationaldbApplication {
 		SpringApplication.run(RelationaldbApplication.class, args);
 	}
 
-	//TODO: crear base de datos donde se registran los usuarios
 
 }

@@ -32,7 +32,6 @@ public class Usuario {
     @Column(name = "password_u", nullable = false, length = Integer.MAX_VALUE)
     private String passwordU;
 
-    @NotNull
     @ColumnDefault("CURRENT_DATE")
     @Column(name = "date_reg", nullable = false)
     private LocalDate dateReg;
