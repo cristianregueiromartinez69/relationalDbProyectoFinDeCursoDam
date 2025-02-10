@@ -5,6 +5,7 @@ import com.finproyectodam.relationaldb.usuarios.registro.servicio.Usuarioregistr
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,7 @@ public class RestControllerUsuarioRegistro {
     }
 
     @PostMapping("/registrousuarios")
-    public ResponseEntity<String> registroUsuariosController(UsuarioDTO usuarioDTO) {
+    public ResponseEntity<String> registroUsuariosController(@RequestBody UsuarioDTO usuarioDTO) {
         try{
             usuarioregistroServicio.registroUsuario(usuarioDTO);
             return ResponseEntity.ok("usuario registrado exitosamente");
