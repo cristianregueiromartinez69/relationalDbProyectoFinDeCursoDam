@@ -7,24 +7,30 @@ import com.finproyectodam.relationaldb.model.entitys.Cancion;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-
+/**
+ * Clase dto delos artistas
+ * @author cristian && Joel
+ * version 1.0
+ */
 public class ArtistaDTO {
 
+    //atributos de clase
     private Integer id;
-
-
     private String nameart;
-
-
     private String generoMusc;
-
-
     private String descrip;
-
     private Set<Album> albumes = new LinkedHashSet<>();
-
     private Set<Cancion> canciones = new LinkedHashSet<>();
 
+    /**
+     * Constructor de la clase
+     * @param id el id del artista
+     * @param nameart el nombre del artista
+     * @param generoMusc su genero musical
+     * @param descrip descripcion del artista
+     * @param albumes los albumes del artista
+     * @param canciones las canciones del artista
+     */
     public ArtistaDTO(Integer id, String nameart, String generoMusc, String descrip, Set<Album> albumes, Set<Cancion> canciones) {
         this.id = id;
         this.nameart = nameart;
@@ -52,6 +58,10 @@ public class ArtistaDTO {
 
     }
 
+    /**
+     * getter y setter de la clase
+     * @return los atributos correspondientes
+     */
     public Integer getId() {
         return id;
     }

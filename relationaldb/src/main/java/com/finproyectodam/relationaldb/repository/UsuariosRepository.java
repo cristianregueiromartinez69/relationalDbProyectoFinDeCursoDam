@@ -6,6 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Repositorio de la clase
+ * @author cristian && Joel
+ * @version 1.0
+ */
 @Repository
 public interface UsuariosRepository extends JpaRepository<Usuario, Integer> {
 

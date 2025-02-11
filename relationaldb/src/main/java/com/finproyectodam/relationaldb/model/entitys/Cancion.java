@@ -8,39 +8,52 @@ import org.hibernate.annotations.ColumnDefault;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * entidas cancion de la base de datos
+ * @author cristian && Joel
+ * version 1.0
+ */
 @Entity
 @Table(name = "canciones")
 public class Cancion {
+
+    //clave primaria
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("nextval('canciones_id_seq')")
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    //titulo de la cancion
     @Size(max = 40)
     @NotNull
     @Column(name = "titulo", nullable = false, length = 40)
     private String titulo;
 
+    //duracion de la cancion
     @NotNull
     @Column(name = "duracion", nullable = false)
     private Integer duracion;
 
+    //url de la cancion
     @Size(max = 300)
     @NotNull
     @Column(name = "urlcancion", nullable = false, length = 300)
     private String urlcancion;
 
+    //nombre  al que pertenece la cancion
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "artistaid", nullable = false)
     private Artista artistaid;
 
+    //album al que pertenece la cancion
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "albumid", nullable = false)
     private Album albumid;
 
+    //relacion muchos a muchos de la playlist
     @ManyToMany
     @JoinTable(name = "playlist_cancion",
             joinColumns = @JoinColumn(name = "cancion_id"),
@@ -50,6 +63,16 @@ public class Cancion {
     public Cancion() {
     }
 
+    /**
+     * Constructores de la clase
+     * @param id la clave primaria
+     * @param titulo el titulo de la cancion
+     * @param duracion la duracion de la cancion
+     * @param urlcancion la url de la cancion
+     * @param artistaid el artista al que pertenece la cancion
+     * @param albumid el album al que perteence la cancion
+     * @param playlists la playlist a la que pertenece
+     */
     public Cancion(Integer id, String titulo, Integer duracion, String urlcancion, Artista artistaid, Album albumid, Set<Playlist> playlists) {
         this.id = id;
         this.titulo = titulo;
@@ -69,7 +92,7 @@ public class Cancion {
     }
 
 
-
+    //getter y setter
     public Integer getId() {
         return id;
     }

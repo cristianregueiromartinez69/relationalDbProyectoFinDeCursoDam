@@ -8,27 +8,33 @@ import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-
+/**
+ * Clase dto de playlist
+ * @author cristian && Joel
+ * version 1.0
+ */
 public class PlaylistDTO {
 
+    //atributos de la clase
     private Integer id;
-
-
     private String titulo;
-
-
     private LocalDate fechacre;
-
     private String descrip;
-
     private Usuario userid;
-
-
     private Set<Cancion> canciones = new LinkedHashSet<>();
 
     public PlaylistDTO() {
     }
 
+    /**
+     * Constructores de la clase
+     * @param id el id de la playlist
+     * @param titulo el titulo de la playlist
+     * @param fechacre la fecha de creacion de la playlist
+     * @param descrip la descripcion de la playlist
+     * @param userid el usuario al que pertenece la playlist
+     * @param canciones las canciones de la playlist
+     */
     public PlaylistDTO(Integer id, String titulo, LocalDate fechacre, String descrip, Usuario userid, Set<Cancion> canciones) {
         this.id = id;
         this.titulo = titulo;
@@ -53,6 +59,10 @@ public class PlaylistDTO {
         this.userid = userid;
     }
 
+    /**
+     * getter y setter de la clase
+     * @return los atributos correspondientes
+     */
     public Integer getId() {
         return id;
     }

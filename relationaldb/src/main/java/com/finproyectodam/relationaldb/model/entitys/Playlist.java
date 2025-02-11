@@ -9,33 +9,45 @@ import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * entidas playlist de la base de datos
+ * @author cristian && Joel
+ * version 1.0
+ */
 @Entity
 @Table(name = "playlist")
 public class Playlist {
+
+    //la clave primaria
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("nextval('playlist_id_seq')")
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    //el titulo de la playlist
     @Size(max = 30)
     @NotNull
     @Column(name = "titulo", nullable = false, length = 30)
     private String titulo;
 
+    // la fecha de creacion
     @NotNull
     @Column(name = "fechacre", nullable = false)
     private LocalDate fechacre;
 
+    //descripcion de la playlist
     @Size(max = 100)
     @Column(name = "descrip", length = 100)
     private String descrip;
 
+    //usuario al que pertenece la playlist
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "userid", nullable = false)
     private Usuario userid;
 
+    //relacion muchos a muchos con canciones
     @ManyToMany
     @JoinTable(name = "playlist_cancion",
             joinColumns = @JoinColumn(name = "playlist_id"),
@@ -45,6 +57,15 @@ public class Playlist {
     public Playlist() {
     }
 
+    /**
+     * Constructores de la clase
+     * @param id la clave primaria
+     * @param titulo el titulo de la playlist
+     * @param fechacre la fecha de creacion de la playlist
+     * @param descrip la descripcion de la playlist
+     * @param userid el usuario al que pertenece la playlist
+     * @param canciones las canciones de la playlist
+     */
     public Playlist(Integer id, String titulo, LocalDate fechacre, String descrip, Usuario userid, Set<Cancion> canciones) {
         this.id = id;
         this.titulo = titulo;
@@ -69,6 +90,7 @@ public class Playlist {
         this.userid = userid;
     }
 
+    //getter y setter
     public Integer getId() {
         return id;
     }
