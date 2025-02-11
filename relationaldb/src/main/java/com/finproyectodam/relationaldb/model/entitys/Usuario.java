@@ -20,12 +20,12 @@ public class Usuario {
 
     @Size(max = 50)
     @NotNull
-    @Column(name = "username", nullable = false, length = 50)
+    @Column(name = "username", nullable = false, length = 50, unique = true)
     private String username;
 
     @Size(max = 60)
     @NotNull
-    @Column(name = "email", nullable = false, length = 60)
+    @Column(name = "email", nullable = false, length = 60, unique = true)
     private String email;
 
     @NotNull
