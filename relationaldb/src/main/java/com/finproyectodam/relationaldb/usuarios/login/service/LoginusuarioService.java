@@ -1,8 +1,11 @@
 package com.finproyectodam.relationaldb.usuarios.login.service;
 
 import com.finproyectodam.relationaldb.model.dto.UsuarioDTO;
+import com.finproyectodam.relationaldb.model.entitys.Usuario;
 import com.finproyectodam.relationaldb.repository.UsuariosRepository;
+import com.finproyectodam.relationaldb.usuarios.login.excepcion.LoginUserExcepcion;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class LoginusuarioService {
@@ -13,10 +16,14 @@ public class LoginusuarioService {
         this.usuariosRepository = usuariosRepository;
     }
 
-    public void loginUser(UsuarioDTO usuarioDTO){
+    public boolean loginUser(UsuarioDTO usuarioDTO){
         if(!checkExistsEmail(usuarioDTO.getEmail())){
-
+            throw new LoginUserExcepcion("Email no encontrado, vuelve a escribirlo");
         }
+        if(!checkExistsPassword(usuarioDTO.getPasswordU())){
+            throw new LoginUserExcepcion("Contraseña no encontrada, vuelve a escribirla");
+        }
+        return true;
     }
 
     public boolean checkExistsEmail(String email){
