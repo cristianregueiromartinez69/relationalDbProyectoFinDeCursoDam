@@ -1,18 +1,17 @@
 package com.finproyectodam.relationaldb.usuarios.login.service;
 
 import com.finproyectodam.relationaldb.model.dto.UsuarioDTO;
-import com.finproyectodam.relationaldb.model.entitys.Usuario;
 import com.finproyectodam.relationaldb.repository.UsuariosRepository;
 import com.finproyectodam.relationaldb.usuarios.login.excepcion.LoginUserExcepcion;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class LoginusuarioService {
+public class LoginUsuarioService {
 
     private final UsuariosRepository usuariosRepository;
 
-    public LoginusuarioService(UsuariosRepository usuariosRepository) {
+    public LoginUsuarioService(UsuariosRepository usuariosRepository) {
         this.usuariosRepository = usuariosRepository;
     }
 
