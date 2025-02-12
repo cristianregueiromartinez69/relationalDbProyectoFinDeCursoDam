@@ -3,6 +3,11 @@ package com.finproyectodam.relationaldb;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Clase desde donde empieza el microservicio a funcionar
+ * @author cristian && Joel
+ * version 1.0
+ */
 @SpringBootApplication
 public class RelationaldbApplication {
 
@@ -10,6 +15,5 @@ public class RelationaldbApplication {
 		SpringApplication.run(RelationaldbApplication.class, args);
 	}
 
-	//TODO: crear base de datos donde se registran los usuarios
 
 }
