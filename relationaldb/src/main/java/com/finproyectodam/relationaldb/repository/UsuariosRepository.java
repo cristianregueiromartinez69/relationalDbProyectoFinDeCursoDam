@@ -14,7 +14,12 @@ import java.util.Optional;
 @Repository
 public interface UsuariosRepository extends JpaRepository<Usuario, Integer> {
 
+    //encontrar a un usuario por alias
     Optional<Usuario> findByUsername(String nombre);
+
+    //encontrar a un usuario por email
     Optional<Usuario> findByEmail(String email);
+
+    //encontrar a un usuario por password
     Optional<Usuario> findByPasswordU(String passwordU);
 }
