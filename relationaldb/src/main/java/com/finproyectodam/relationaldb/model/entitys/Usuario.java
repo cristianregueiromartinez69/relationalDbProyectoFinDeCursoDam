@@ -91,6 +91,11 @@ public class Usuario {
         this.dateReg = dateReg;
     }
 
+    public Usuario(String email, String passwordU) {
+        this.email = email;
+        this.passwordU = passwordU;
+    }
+
     //getter y setter
     public Integer getId() {
         return id;
