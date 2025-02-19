@@ -33,12 +33,12 @@ public class Artista {
     //genero musical
     @Size(max = 30)
     @NotNull
-    @Column(name = "genero_musc", nullable = false, length = 30)
+    @Column(name = "genero_musc", nullable = false, length = 100)
     private String generoMusc;
 
     //descripcion del artista
     @Size(max = 60)
-    @Column(name = "descrip", length = 60)
+    @Column(name = "descrip", length = 1000)
     private String descrip;
 
     //lista de albumes

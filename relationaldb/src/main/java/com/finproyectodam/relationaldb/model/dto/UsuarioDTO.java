@@ -59,6 +59,11 @@ public class UsuarioDTO {
         this.dateReg = dateReg;
     }
 
+    public UsuarioDTO(String email, String passwordU) {
+        this.email = email;
+        this.passwordU = passwordU;
+    }
+
     /**
      * getter y setter de la clase
      * @return los atributos correspondientes
