@@ -15,6 +15,6 @@ public class RelationaldbApplication {
 		SpringApplication.run(RelationaldbApplication.class, args);
 	}
 
-	//TODO: realizar el inicio de sesión de usuarios
+	//TODO: búsqueda de artista por nombre
 
 }
