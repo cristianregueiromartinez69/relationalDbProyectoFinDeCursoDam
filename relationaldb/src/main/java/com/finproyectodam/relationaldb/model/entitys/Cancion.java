@@ -47,14 +47,14 @@ public class Cancion {
 
     //nombre  al que pertenece la cancion
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "artistaid", nullable = false)
     @JsonBackReference
     private Artista artistaid;
 
     //album al que pertenece la cancion
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "albumid", nullable = false)
     @JsonBackReference
     private Album albumid;

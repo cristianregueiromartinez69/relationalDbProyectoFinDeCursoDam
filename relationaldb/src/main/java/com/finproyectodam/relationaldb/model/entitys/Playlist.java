@@ -46,7 +46,7 @@ public class Playlist {
 
     //usuario al que pertenece la playlist
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "userid", nullable = false)
     @JsonBackReference
     private Usuario userid;
