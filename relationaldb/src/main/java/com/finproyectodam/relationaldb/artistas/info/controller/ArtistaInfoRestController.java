@@ -23,6 +23,7 @@ public class ArtistaInfoRestController {
         this.artistaInfoService = artistaInfoService;
     }
 
+    /*
     @GetMapping("/id/{id}")
     public ResponseEntity<Artista> getArtistaByIdController(@PathVariable Integer id) {
         Artista artista = artistaInfoService.getArtistaById(id);
@@ -31,13 +32,14 @@ public class ArtistaInfoRestController {
         }
         return ResponseEntity.ok(artista);
     }
-
+    */
     @GetMapping("/nombre/{nombre}")
     public ResponseEntity<Artista> getArtistaNombreRestController(@PathVariable String nombre) {
             Artista artista = artistaInfoService.getArtistaByNombre(nombre);
             if (artista == null) {
                 return ResponseEntity.notFound().build();
             }
+            System.out.println(artista);
             return ResponseEntity.ok(artista);
     }
 
@@ -46,6 +48,9 @@ public class ArtistaInfoRestController {
         List<Artista> artistaList = artistaInfoService.getAllArtistasByGenero(genero);
         if(artistaList.isEmpty()) {
             return ResponseEntity.notFound().build();
+        }
+        for(Artista artista : artistaList) {
+            System.out.println(artista);
         }
         return ResponseEntity.ok(artistaList);
     }
