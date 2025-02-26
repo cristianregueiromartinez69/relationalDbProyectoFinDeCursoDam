@@ -23,7 +23,7 @@ public class ArtistaInfoRestController {
         this.artistaInfoService = artistaInfoService;
     }
 
-    /*
+
     @GetMapping("/id/{id}")
     public ResponseEntity<Artista> getArtistaByIdController(@PathVariable Integer id) {
         Artista artista = artistaInfoService.getArtistaById(id);
@@ -32,7 +32,7 @@ public class ArtistaInfoRestController {
         }
         return ResponseEntity.ok(artista);
     }
-    */
+
     @GetMapping("/nombre/{nombre}")
     public ResponseEntity<Artista> getArtistaNombreRestController(@PathVariable String nombre) {
             Artista artista = artistaInfoService.getArtistaByNombre(nombre);
