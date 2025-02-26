@@ -43,7 +43,7 @@ public class Album {
 
     //artista al que pertenece
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "artistaid", nullable = false)
     @JsonBackReference
     private Artista artistaid;
