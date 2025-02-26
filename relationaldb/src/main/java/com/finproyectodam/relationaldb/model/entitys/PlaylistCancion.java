@@ -22,7 +22,7 @@ public class PlaylistCancion {
 
     //la playlist
     @MapsId("playlistId")
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "playlist_id", nullable = false)
     @JsonBackReference
@@ -30,7 +30,7 @@ public class PlaylistCancion {
 
     //la cancion de la playlist
     @MapsId("cancionId")
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "cancion_id", nullable = false)
     @JsonBackReference

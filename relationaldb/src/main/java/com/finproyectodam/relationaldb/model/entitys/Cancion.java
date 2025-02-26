@@ -64,6 +64,7 @@ public class Cancion {
     @JoinTable(name = "playlist_cancion",
             joinColumns = @JoinColumn(name = "cancion_id"),
             inverseJoinColumns = @JoinColumn(name = "playlist_id"))
+    @JsonIgnore
     private Set<Playlist> playlists = new LinkedHashSet<>();
 
     public Cancion() {

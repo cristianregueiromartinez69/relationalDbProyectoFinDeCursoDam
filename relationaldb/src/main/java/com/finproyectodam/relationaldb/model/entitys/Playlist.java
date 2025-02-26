@@ -1,6 +1,7 @@
 package com.finproyectodam.relationaldb.model.entitys;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -56,7 +57,9 @@ public class Playlist {
     @JoinTable(name = "playlist_cancion",
             joinColumns = @JoinColumn(name = "playlist_id"),
             inverseJoinColumns = @JoinColumn(name = "cancion_id"))
+    @JsonIgnore
     private Set<Cancion> canciones = new LinkedHashSet<>();
+
 
     public Playlist() {
     }
