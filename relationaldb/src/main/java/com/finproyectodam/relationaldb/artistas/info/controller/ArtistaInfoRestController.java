@@ -11,19 +11,33 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Rest controller de artistas
+ * @author cristian && Joel
+ * @version 1.0
+ */
 @RestController
 @RequestMapping("/relationaldb/spotify/artistas/info")
 public class ArtistaInfoRestController {
 
+    //variable de servicios de artista
     @Autowired
     private final ArtistaInfoService artistaInfoService;
 
+    /**
+     * Constructor de la clase
+     * @param artistaInfoService el servicio de artistas
+     */
     @Autowired
     public ArtistaInfoRestController(ArtistaInfoService artistaInfoService) {
         this.artistaInfoService = artistaInfoService;
     }
 
-
+    /**
+     * Metodo Get para obtener un artista por id
+     * @param id el id del artista
+     * @return el artista o null
+     */
     @GetMapping("/id/{id}")
     public ResponseEntity<Artista> getArtistaByIdController(@PathVariable Integer id) {
         Artista artista = artistaInfoService.getArtistaById(id);
@@ -33,6 +47,11 @@ public class ArtistaInfoRestController {
         return ResponseEntity.ok(artista);
     }
 
+    /**
+     * Metodo Get para obtener un artista por nombre
+     * @param nombre el nombre del artista
+     * @return el artista o null
+     */
     @GetMapping("/nombre/{nombre}")
     public ResponseEntity<Artista> getArtistaNombreRestController(@PathVariable String nombre) {
             Artista artista = artistaInfoService.getArtistaByNombre(nombre);
@@ -43,6 +62,11 @@ public class ArtistaInfoRestController {
             return ResponseEntity.ok(artista);
     }
 
+    /**
+     * Metodo Get para obtener una lista de artistas por genero
+     * @param genero el genero del artista
+     * @return la lista de artistas o null
+     */
     @GetMapping("/genero/{genero}")
     public ResponseEntity<List<Artista>> getArtistaGeneroRestController(@PathVariable String genero) {
         List<Artista> artistaList = artistaInfoService.getAllArtistasByGenero(genero);
