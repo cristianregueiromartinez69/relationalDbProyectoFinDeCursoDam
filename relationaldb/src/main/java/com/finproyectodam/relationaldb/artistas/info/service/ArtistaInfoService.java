@@ -28,4 +28,10 @@ public class ArtistaInfoService {
     public List<Artista> getAllArtistasByGenero(String genero) {
         return artistasRepository.findArtistasBygeneroMusc(genero);
     }
+
+    public Artista getArtistaById(Integer id) {
+        ArtistaDTO artistaDTO = new ArtistaDTO();
+        artistaDTO.setId(id);
+        return artistasRepository.findByid(artistaDTO.getId());
+    }
 }

@@ -1,5 +1,8 @@
 package com.finproyectodam.relationaldb.model.entitys;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -16,6 +19,8 @@ import java.util.Set;
  * @author cristian && Joel
  * @version 1.0
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
@@ -51,6 +56,7 @@ public class Usuario {
 
     //lista de playlist del usuario
     @OneToMany(mappedBy = "userid")
+    @JsonManagedReference
     private Set<Playlist> playlists = new LinkedHashSet<>();
 
     public Usuario() {

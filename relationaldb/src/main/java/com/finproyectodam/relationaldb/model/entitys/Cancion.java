@@ -1,5 +1,9 @@
 package com.finproyectodam.relationaldb.model.entitys;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -13,6 +17,8 @@ import java.util.Set;
  * @author cristian && Joel
  * version 1.0
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "canciones")
 public class Cancion {
@@ -43,14 +49,16 @@ public class Cancion {
 
     //nombre  al que pertenece la cancion
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "artistaid", nullable = false)
+    @JsonBackReference
     private Artista artistaid;
 
     //album al que pertenece la cancion
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "albumid", nullable = false)
+    @JsonBackReference
     private Album albumid;
 
     //relacion muchos a muchos de la playlist
@@ -58,6 +66,7 @@ public class Cancion {
     @JoinTable(name = "playlist_cancion",
             joinColumns = @JoinColumn(name = "cancion_id"),
             inverseJoinColumns = @JoinColumn(name = "playlist_id"))
+    @JsonIgnore
     private Set<Playlist> playlists = new LinkedHashSet<>();
 
     public Cancion() {

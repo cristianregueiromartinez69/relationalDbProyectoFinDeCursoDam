@@ -1,5 +1,6 @@
 package com.finproyectodam.relationaldb.model.entitys;
 
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -13,6 +14,9 @@ import java.util.Set;
  * @author cristian && joel
  * @version 1.0
  */
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "albumes")
 public class Album {
@@ -37,12 +41,14 @@ public class Album {
 
     //artista al que pertenece
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "artistaid", nullable = false)
+    @JsonBackReference
     private Artista artistaid;
 
     //lista de canciones del album
     @OneToMany(mappedBy = "albumid")
+    @JsonManagedReference
     private Set<Cancion> canciones = new LinkedHashSet<>();
 
     /**

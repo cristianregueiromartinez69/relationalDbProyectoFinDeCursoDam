@@ -1,5 +1,8 @@
 package com.finproyectodam.relationaldb.model.entitys;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -9,6 +12,8 @@ import org.hibernate.annotations.OnDeleteAction;
  * @author cristian && Joel
  * version 1.0
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "playlist_cancion")
 public class PlaylistCancion {
@@ -22,6 +27,7 @@ public class PlaylistCancion {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "playlist_id", nullable = false)
+    @JsonBackReference
     private Playlist playlist;
 
     //la cancion de la playlist
@@ -29,6 +35,7 @@ public class PlaylistCancion {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "cancion_id", nullable = false)
+    @JsonBackReference
     private Cancion cancion;
 
     /**

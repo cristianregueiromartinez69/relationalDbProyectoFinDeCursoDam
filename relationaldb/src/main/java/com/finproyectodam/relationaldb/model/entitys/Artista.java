@@ -1,5 +1,9 @@
 package com.finproyectodam.relationaldb.model.entitys;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -13,6 +17,8 @@ import java.util.Set;
  * @author cristian && Joel
  * version 1.0
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "artistas")
 public class Artista {
@@ -43,10 +49,12 @@ public class Artista {
 
     //lista de albumes
     @OneToMany(mappedBy = "artistaid")
+    @JsonManagedReference
     private Set<Album> albumes = new LinkedHashSet<>();
 
     //lista de canciones del artista
     @OneToMany(mappedBy = "artistaid")
+    @JsonManagedReference
     private Set<Cancion> canciones = new LinkedHashSet<>();
 
     /**
@@ -134,4 +142,15 @@ public class Artista {
         this.canciones = canciones;
     }
 
+    @Override
+    public String toString() {
+        return "Artista{" +
+                "id=" + id +
+                ", nameart='" + nameart + '\'' +
+                ", generoMusc='" + generoMusc + '\'' +
+                ", descrip='" + descrip + '\'' +
+                ", albumes=" + albumes +
+                ", canciones=" + canciones +
+                '}';
+    }
 }

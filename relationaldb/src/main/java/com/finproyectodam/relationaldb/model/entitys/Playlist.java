@@ -1,5 +1,9 @@
 package com.finproyectodam.relationaldb.model.entitys;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -14,6 +18,8 @@ import java.util.Set;
  * @author cristian && Joel
  * version 1.0
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "playlist")
 public class Playlist {
@@ -43,8 +49,9 @@ public class Playlist {
 
     //usuario al que pertenece la playlist
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "userid", nullable = false)
+    @JsonBackReference
     private Usuario userid;
 
     //relacion muchos a muchos con canciones
@@ -52,7 +59,9 @@ public class Playlist {
     @JoinTable(name = "playlist_cancion",
             joinColumns = @JoinColumn(name = "playlist_id"),
             inverseJoinColumns = @JoinColumn(name = "cancion_id"))
+    @JsonIgnore
     private Set<Cancion> canciones = new LinkedHashSet<>();
+
 
     public Playlist() {
     }
