@@ -19,7 +19,7 @@ public interface AlbumesRepository extends JpaRepository<Album, Integer> {
 
     //metodo para encontrar albumes por nombre
     @EntityGraph(attributePaths = {"canciones"})
-    Album findBytitulo(String nombre);
+    List<Album> findBytitulo(String nombre);
 
     //metodo para encontrar albumes entre años de lanzamiento
     @EntityGraph(attributePaths = {"canciones"})

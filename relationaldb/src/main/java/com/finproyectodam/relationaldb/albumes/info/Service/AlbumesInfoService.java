@@ -37,9 +37,9 @@ public class AlbumesInfoService {
     /**
      * Metodo para obtener albumes por el titulo
      * @param  titulo el titulo del album
-     * @return el album o null
+     * @return una lista de albumes, album o null
      */
-    public Album getAlbumByTituloService(String titulo) {
+    public List<Album> getAlbumByTituloService(String titulo) {
         return albumesRepository.findBytitulo(titulo);
     }
 

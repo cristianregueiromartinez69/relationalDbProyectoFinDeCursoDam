@@ -42,13 +42,13 @@ public class AlbumesInfoRestController {
     }
 
     /**
-     * Metodo getter para obtener un album por el titulo
+     * Metodo getter para obtener albumes por titulos
      * @param titulo el titulo del album
-     * @return el album o null
+     * @return una lista de albumes, un album o null
      */
     @GetMapping("/titulo/{titulo}")
-    public ResponseEntity<Album> getAlbumByTituloController(@PathVariable String titulo) {
-        Album album = albumesInfoService.getAlbumByTituloService(titulo);
+    public ResponseEntity<List<Album>> getAlbumByTituloController(@PathVariable String titulo) {
+        List<Album> album = albumesInfoService.getAlbumByTituloService(titulo);
         if(album == null) {
             return ResponseEntity.notFound().build();
         }
