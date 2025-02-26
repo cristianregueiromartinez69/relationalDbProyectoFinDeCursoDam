@@ -10,6 +10,7 @@ import java.util.List;
 public interface ArtistasRepository extends JpaRepository<Artista, Integer>{
 
     Artista findBynameart(String nombre);
+    Artista findByid(Integer id);
     List<Artista> findArtistasBygeneroMusc(String genero);
 
 }
