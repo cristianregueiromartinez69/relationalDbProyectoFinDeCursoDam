@@ -1,5 +1,7 @@
 package com.finproyectodam.relationaldb.model.entitys;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -14,6 +16,7 @@ import java.util.Set;
  * @author cristian && Joel
  * version 1.0
  */
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "playlist")
 public class Playlist {
@@ -45,6 +48,7 @@ public class Playlist {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "userid", nullable = false)
+    @JsonBackReference
     private Usuario userid;
 
     //relacion muchos a muchos con canciones
