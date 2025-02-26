@@ -15,6 +15,6 @@ public class RelationaldbApplication {
 		SpringApplication.run(RelationaldbApplication.class, args);
 	}
 
-	//TODO: búsqueda de artista por nombre
+	//TODO: hacer filtros de albumes
 
 }
