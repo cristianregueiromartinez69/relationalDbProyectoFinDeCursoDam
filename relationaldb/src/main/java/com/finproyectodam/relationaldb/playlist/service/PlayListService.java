@@ -2,10 +2,7 @@ package com.finproyectodam.relationaldb.playlist.service;
 
 import com.finproyectodam.relationaldb.model.dto.PlaylistDTO;
 import com.finproyectodam.relationaldb.model.entitys.Playlist;
-import com.finproyectodam.relationaldb.model.entitys.Usuario;
 import com.finproyectodam.relationaldb.repository.PlayListsRepository;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -32,20 +29,10 @@ public class PlayListService {
      */
     public void savePlayList(PlaylistDTO playlistDTO) {
         Playlist playlist = new Playlist(playlistDTO.getTitulo(), playlistDTO.getFechacre(),
-                playlistDTO.getDescrip(), getCurrentUser());
+                playlistDTO.getDescrip(), playlistDTO.getUserid());
         playListsRepository.save(playlist);
     }
 
-    /**
-     * Metodo para obtener al usuario autenticado
-     * @return el usuario o null
-     */
-    private Usuario getCurrentUser(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.isAuthenticated()) {
-            return (Usuario) authentication.getPrincipal();
-        }
-        return null;
-    }
+
 
 }
