@@ -23,7 +23,7 @@ import java.util.Set;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "usuarios")
-public class Usuario {
+public class Usuario{
 
     //clave primaria
     @Id
