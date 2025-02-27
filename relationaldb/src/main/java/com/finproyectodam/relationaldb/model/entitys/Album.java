@@ -126,4 +126,14 @@ public class Album {
         this.canciones = canciones;
     }
 
+    @Override
+    public String toString() {
+        return "Album{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", anolanz=" + anolanz +
+                ", artistaid=" + artistaid +
+                ", canciones=" + canciones +
+                '}';
+    }
 }
