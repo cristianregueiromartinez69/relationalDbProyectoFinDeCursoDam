@@ -22,10 +22,11 @@ public class PlayListRestController {
     @PostMapping("/crear")
     public ResponseEntity<String> savePlayListController(@RequestBody PlaylistDTO playlistDTO) {
         try{
+            System.out.println(playlistDTO.toString());
             playListService.savePlayList(playlistDTO);
         }catch (Exception e){
             e.printStackTrace();
         }
-        return ResponseEntity.ok().body("Playlist creada correctamente");
+        return ResponseEntity.ok("Playlist creada correctamente");
     }
 }
