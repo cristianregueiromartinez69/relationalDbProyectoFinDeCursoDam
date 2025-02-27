@@ -58,7 +58,6 @@ public class ArtistaInfoRestController {
             if (artista == null) {
                 return ResponseEntity.notFound().build();
             }
-            System.out.println(artista);
             return ResponseEntity.ok(artista);
     }
 
@@ -72,9 +71,6 @@ public class ArtistaInfoRestController {
         List<Artista> artistaList = artistaInfoService.getAllArtistasByGenero(genero);
         if(artistaList.isEmpty()) {
             return ResponseEntity.notFound().build();
-        }
-        for(Artista artista : artistaList) {
-            System.out.println(artista);
         }
         return ResponseEntity.ok(artistaList);
     }
