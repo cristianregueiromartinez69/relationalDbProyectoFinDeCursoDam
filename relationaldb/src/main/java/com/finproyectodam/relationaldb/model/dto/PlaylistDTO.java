@@ -1,12 +1,7 @@
 package com.finproyectodam.relationaldb.model.dto;
 
-import com.finproyectodam.relationaldb.model.entitys.Cancion;
-import com.finproyectodam.relationaldb.model.entitys.Usuario;
-
-
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Set;
+
 
 /**
  * Clase dto de playlist
