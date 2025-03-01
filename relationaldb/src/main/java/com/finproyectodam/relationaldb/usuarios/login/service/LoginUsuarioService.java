@@ -1,9 +1,19 @@
 package com.finproyectodam.relationaldb.usuarios.login.service;
 
+import com.finproyectodam.relationaldb.excepciones.usuarios.NotFoundException;
 import com.finproyectodam.relationaldb.model.dto.UsuarioDTO;
+import com.finproyectodam.relationaldb.model.entitys.Usuario;
 import com.finproyectodam.relationaldb.repository.UsuariosRepository;
 import com.finproyectodam.relationaldb.excepciones.usuarios.LoginUserExcepcion;
+import com.finproyectodam.relationaldb.usuarios.interfaces.LoggedInterface;
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.net.http.HttpHeaders;
 
 /**
  * Servicio de login de usuarios
@@ -11,7 +21,7 @@ import org.springframework.stereotype.Service;
  * @version 1.0
  */
 @Service
-public class LoginUsuarioService {
+public class LoginUsuarioService implements LoggedInterface {
 
     private final UsuariosRepository usuariosRepository;
 
@@ -54,6 +64,15 @@ public class LoginUsuarioService {
      */
     public boolean checkExistsPassword(String password){
         return usuariosRepository.findByPasswordU(password).isPresent();
+    }
+
+    @Override
+    public Usuario getLoguedUser(HttpHeaders headers) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = ((Usuario) authentication.getPrincipal()).getEmail();
+
+        return usuariosRepository.findByEmail(email)
+                .orElseThrow(() -> new NotFoundException("Usuario no encontrado"));
     }
 
 }
