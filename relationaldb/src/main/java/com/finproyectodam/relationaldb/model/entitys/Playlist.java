@@ -99,7 +99,11 @@ public class Playlist {
         this.userid = userid;
     }
 
-
+    public Playlist(String titulo, LocalDate fechacre, String descrip) {
+        this.titulo = titulo;
+        this.fechacre = fechacre;
+        this.descrip = descrip;
+    }
 
     //getter y setter
     public Integer getId() {
