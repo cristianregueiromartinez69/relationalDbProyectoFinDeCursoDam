@@ -52,6 +52,7 @@ public class Playlist {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "userid", nullable = false)
     @JsonBackReference
+    @JsonIgnore
     private Usuario userid;
 
     //relacion muchos a muchos con canciones
