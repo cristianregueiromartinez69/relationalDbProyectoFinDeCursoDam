@@ -2,9 +2,14 @@ package com.finproyectodam.relationaldb.playlist.service;
 
 import com.finproyectodam.relationaldb.model.dto.PlaylistDTO;
 import com.finproyectodam.relationaldb.model.entitys.Playlist;
+import com.finproyectodam.relationaldb.model.entitys.Usuario;
 import com.finproyectodam.relationaldb.repository.PlayListsRepository;
+import com.finproyectodam.relationaldb.repository.UsuariosRepository;
+import com.finproyectodam.relationaldb.usuarios.token.UsersTokens;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Optional;
 
 
 /**
@@ -16,13 +21,17 @@ public class PlayListService {
 
     //variable del repositorio
     private final PlayListsRepository playListsRepository;
+    private final UsuariosRepository usuariosRepository;
+    private final UsersTokens usersTokens;
 
     /**
      * Constructor de la clase
      * @param playListsRepository el repositorio de playlist
      */
-    public PlayListService(PlayListsRepository playListsRepository) {
+    public PlayListService(PlayListsRepository playListsRepository, UsuariosRepository usuariosRepository, UsersTokens usersTokens) {
         this.playListsRepository = playListsRepository;
+        this.usuariosRepository = usuariosRepository;
+        this.usersTokens = usersTokens;
     }
 
     /**
@@ -31,11 +40,21 @@ public class PlayListService {
      */
     public void savePlayList(PlaylistDTO playlistDTO) {
         Playlist playlist = new Playlist(playlistDTO.getTitulo(), playlistDTO.getFechacre(),
-                playlistDTO.getDescrip());
+                playlistDTO.getDescrip(), getCurrentUser(usersTokens.getUsersLogin()));
 
         playListsRepository.save(playlist);
     }
 
+    public Usuario getCurrentUser(HashMap<Usuario, String> logginUsers){
+
+        for(Usuario usuario : logginUsers.keySet()){
+            Optional<Usuario> userAuthenticator = usuariosRepository.findByEmail(usuario.getEmail());
+            if(userAuthenticator.isPresent()){
+                return usuariosRepository.findByEmail(usuario.getEmail()).get();
+            }
+        }
+        return null;
+    }
 
 
 }

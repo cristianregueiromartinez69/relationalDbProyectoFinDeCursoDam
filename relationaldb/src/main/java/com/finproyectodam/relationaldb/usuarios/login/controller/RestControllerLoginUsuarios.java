@@ -47,10 +47,7 @@ public class RestControllerLoginUsuarios {
             if (loginusuarioService.loginUser(usuarioDTO)) {
                 usersTokens.putUsersLogin(new Usuario(usuarioDTO.getEmail(),
                         usuarioDTO.getPasswordU()), UUID.randomUUID().toString());
-                for(Map.Entry<Usuario, String> entry : usersTokens.getUsersLogin().entrySet()) {
-                    System.out.println("Usuario: " + entry.getKey().getEmail());
-                    System.out.println("token: " + entry.getValue());
-                }
+
                 return ResponseEntity.ok("Usuario logueado correctamente ");
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales incorrectas");
