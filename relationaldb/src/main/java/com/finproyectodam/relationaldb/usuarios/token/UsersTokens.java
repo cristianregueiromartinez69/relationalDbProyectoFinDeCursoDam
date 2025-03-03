@@ -8,7 +8,7 @@ import java.util.HashMap;
 @Component
 public class UsersTokens {
 
-    private HashMap<Usuario, String> usersLoggin;
+    private final HashMap<Usuario, String> usersLoggin;
 
     public UsersTokens() {
         usersLoggin = new HashMap<>();
@@ -22,7 +22,7 @@ public class UsersTokens {
         usersLoggin.remove(usuario);
     }
 
-    public String getUsersLogin(Usuario usuario) {
-        return usersLoggin.get(usuario);
+    public HashMap<Usuario, String> getUsersLogin() {
+        return usersLoggin;
     }
 }

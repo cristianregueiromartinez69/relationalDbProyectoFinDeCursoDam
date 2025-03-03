@@ -2,13 +2,18 @@ package com.finproyectodam.relationaldb.usuarios.login.controller;
 
 import com.finproyectodam.relationaldb.model.dto.UsuarioDTO;
 import com.finproyectodam.relationaldb.excepciones.usuarios.LoginUserExcepcion;
+import com.finproyectodam.relationaldb.model.entitys.Usuario;
 import com.finproyectodam.relationaldb.usuarios.login.service.LoginUsuarioService;
+import com.finproyectodam.relationaldb.usuarios.token.UsersTokens;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * RestController de login de usuarios
@@ -20,13 +25,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class RestControllerLoginUsuarios {
 
     private final LoginUsuarioService loginusuarioService;
+    private final UsersTokens usersTokens;
 
     /**
      * Constructor de la clase
      * @param loginusuarioService el login de los usuarios
      */
-    public RestControllerLoginUsuarios(LoginUsuarioService loginusuarioService) {
+    public RestControllerLoginUsuarios(LoginUsuarioService loginusuarioService, UsersTokens usersTokens) {
         this.loginusuarioService = loginusuarioService;
+        this.usersTokens = usersTokens;
     }
 
     /**
@@ -38,7 +45,12 @@ public class RestControllerLoginUsuarios {
     public ResponseEntity<String> loginUsuariosController(@RequestBody UsuarioDTO usuarioDTO) {
         try {
             if (loginusuarioService.loginUser(usuarioDTO)) {
-
+                usersTokens.putUsersLogin(new Usuario(usuarioDTO.getEmail(),
+                        usuarioDTO.getPasswordU()), UUID.randomUUID().toString());
+                for(Map.Entry<Usuario, String> entry : usersTokens.getUsersLogin().entrySet()) {
+                    System.out.println("Usuario: " + entry.getKey().getEmail());
+                    System.out.println("token: " + entry.getValue());
+                }
                 return ResponseEntity.ok("Usuario logueado correctamente ");
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales incorrectas");
