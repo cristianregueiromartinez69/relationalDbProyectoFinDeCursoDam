@@ -1,5 +1,7 @@
 package com.finproyectodam.relationaldb.usuarios.login.controller;
 
+import com.finproyectodam.relationaldb.config.JwtUtil;
+import com.finproyectodam.relationaldb.model.dto.AuthResponseDTO;
 import com.finproyectodam.relationaldb.model.dto.UsuarioDTO;
 import com.finproyectodam.relationaldb.excepciones.usuarios.LoginUserExcepcion;
 import com.finproyectodam.relationaldb.usuarios.login.service.LoginUsuarioService;
@@ -20,13 +22,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class RestControllerLoginUsuarios {
 
     private final LoginUsuarioService loginusuarioService;
+    private final JwtUtil jwtUtil;
+    private final AuthResponseDTO authResponseDTO;
 
     /**
      * Constructor de la clase
      * @param loginusuarioService el login de los usuarios
      */
-    public RestControllerLoginUsuarios(LoginUsuarioService loginusuarioService) {
+    public RestControllerLoginUsuarios(LoginUsuarioService loginusuarioService, JwtUtil jwtUtil, AuthResponseDTO authResponseDTO) {
         this.loginusuarioService = loginusuarioService;
+        this.jwtUtil = jwtUtil;
+        this.authResponseDTO = authResponseDTO;
     }
 
     /**
@@ -38,7 +44,10 @@ public class RestControllerLoginUsuarios {
     public ResponseEntity<String> loginUsuariosController(@RequestBody UsuarioDTO usuarioDTO) {
         try {
             if (loginusuarioService.loginUser(usuarioDTO)) {
-                return ResponseEntity.ok("Usuario logueado correctamente");
+                String token = jwtUtil.generateToken(usuarioDTO.getUsername());
+                authResponseDTO.setToken(token);
+
+                return ResponseEntity.ok("Usuario logueado correctamente " + authResponseDTO.getToken());
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales incorrectas");
             }
