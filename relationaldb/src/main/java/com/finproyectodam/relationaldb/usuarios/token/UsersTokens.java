@@ -1,28 +1,29 @@
 package com.finproyectodam.relationaldb.usuarios.token;
 
-import com.finproyectodam.relationaldb.model.entitys.Usuario;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class UsersTokens {
-
-    private final HashMap<Usuario, String> usersLoggin;
+    // Mapa concurrente para almacenar tokens de usuarios
+    private final ConcurrentHashMap<String, String> userTokens;
 
     public UsersTokens() {
-        usersLoggin = new HashMap<>();
+        userTokens = new ConcurrentHashMap<>();
     }
 
-    public void putUsersLogin(Usuario usuario, String token) {
-        usersLoggin.put(usuario, token);
+    public void putUserToken(String email, String token) {
+        userTokens.put(email, token);
     }
 
-    public void deleteUsersLogin(Usuario usuario) {
-        usersLoggin.remove(usuario);
+    public String getUserToken(String email) {
+        return userTokens.get(email);
     }
 
-    public HashMap<Usuario, String> getUsersLogin() {
-        return usersLoggin;
+    public void removeUserToken(String email) {
+        userTokens.remove(email);
     }
+}
+
 }
