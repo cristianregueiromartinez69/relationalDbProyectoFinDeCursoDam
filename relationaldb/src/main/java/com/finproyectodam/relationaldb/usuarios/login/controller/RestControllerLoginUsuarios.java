@@ -45,11 +45,10 @@ public class RestControllerLoginUsuarios {
     public ResponseEntity<String> loginUsuariosController(@RequestBody UsuarioDTO usuarioDTO) {
         try {
             if (loginusuarioService.loginUser(usuarioDTO)) {
-                usersTokens.putUsersLogin(new Usuario(usuarioDTO.getEmail(),
-                        usuarioDTO.getPasswordU()), UUID.randomUUID().toString());
+                usersTokens.putUserToken(usuarioDTO.getEmail(), UUID.randomUUID().toString());
 
-                for(Map.Entry<Usuario, String> entry : usersTokens.getUsersLogin().entrySet()) {
-                    System.out.println(entry.getKey().getEmail());
+                for(Map.Entry<String, String> entry : usersTokens.getUserTokens().entrySet()) {
+                    System.out.println(entry.getKey());
                 }
 
                 return ResponseEntity.ok("Usuario logueado correctamente ");

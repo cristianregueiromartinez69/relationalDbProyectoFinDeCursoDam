@@ -24,6 +24,10 @@ public class UsersTokens {
     public void removeUserToken(String email) {
         userTokens.remove(email);
     }
+
+    public ConcurrentHashMap<String, String> getUserTokens() {
+        return userTokens;
+    }
 }
 
-}
+

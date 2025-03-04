@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
@@ -40,17 +41,17 @@ public class PlayListService {
      */
     public void savePlayList(PlaylistDTO playlistDTO) {
         Playlist playlist = new Playlist(playlistDTO.getTitulo(), playlistDTO.getFechacre(),
-                playlistDTO.getDescrip(), getCurrentUser(usersTokens.getUsersLogin()));
+                playlistDTO.getDescrip(), getCurrentUser(usersTokens.getUserTokens()));
 
         playListsRepository.save(playlist);
     }
 
-    public Usuario getCurrentUser(HashMap<Usuario, String> logginUsers){
+    public Usuario getCurrentUser(ConcurrentHashMap<String, String> logginUsers){
 
-        for(Usuario usuario : logginUsers.keySet()){
-            Optional<Usuario> userAuthenticator = usuariosRepository.findByEmail(usuario.getEmail());
+        for(String usuario : logginUsers.keySet()){
+            Optional<Usuario> userAuthenticator = usuariosRepository.findByEmail(usuario);
             if(userAuthenticator.isPresent()){
-                return usuariosRepository.findByEmail(usuario.getEmail()).get();
+                return usuariosRepository.findByEmail(usuario).get();
             }
         }
         return null;
