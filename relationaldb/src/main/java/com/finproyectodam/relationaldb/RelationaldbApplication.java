@@ -15,6 +15,6 @@ public class RelationaldbApplication {
 		SpringApplication.run(RelationaldbApplication.class, args);
 	}
 
-	//TODO: añadiendo canciones a la playlist
+	//TODO: haciendo lista de playlist
 
 }
