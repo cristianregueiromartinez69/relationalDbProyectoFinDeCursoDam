@@ -24,7 +24,7 @@ public interface PlayListsRepository extends JpaRepository<Playlist, Integer> {
      * Metodo para devolver todas las playList del usuario logueado
      * @return la lista de playlist que tenga el usuario logueado
      */
-    List<Playlist> findAllByuserid(Usuario user);
+    List<Playlist> findByUserid(Usuario user);
 
 
 }

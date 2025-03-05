@@ -86,7 +86,10 @@ public class PlayListService {
      */
     public List<Playlist> getAllPlaylistService(){
         Usuario userAuthenticator = getCurrentUser(usersTokens.getUserTokens());
-        return playListsRepository.findAllByuserid(userAuthenticator);
+        if(userAuthenticator == null){
+            throw new RuntimeException("Usuario no logueado, fuera hacker!!");
+        }
+        return playListsRepository.findByUserid(userAuthenticator);
     }
 
     /**
