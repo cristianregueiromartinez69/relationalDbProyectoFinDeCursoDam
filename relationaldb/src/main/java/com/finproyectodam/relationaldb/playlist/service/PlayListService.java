@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -77,6 +78,15 @@ public class PlayListService {
         else{
             throw new RuntimeException("Usuario no logueado, fuera hacker!!");
         }
+    }
+
+    /**
+     * Metodo que devuelve todas las playlist del usuario
+     * @return las playlist del usuario
+     */
+    public List<Playlist> getAllPlaylistService(){
+        Usuario userAuthenticator = getCurrentUser(usersTokens.getUserTokens());
+        return playListsRepository.findAllByuserid(userAuthenticator);
     }
 
     /**

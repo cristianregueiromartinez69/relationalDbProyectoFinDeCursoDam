@@ -1,6 +1,7 @@
 package com.finproyectodam.relationaldb.repository;
 
 import com.finproyectodam.relationaldb.model.entitys.Playlist;
+import com.finproyectodam.relationaldb.model.entitys.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -20,10 +21,10 @@ public interface PlayListsRepository extends JpaRepository<Playlist, Integer> {
     Playlist findByid(Integer id);
 
     /**
-     * Metodo para devolver todas las playList
-     * @return la lista de playlist que tengas
+     * Metodo para devolver todas las playList del usuario logueado
+     * @return la lista de playlist que tenga el usuario logueado
      */
-    List<Playlist> findAll();
+    List<Playlist> findAllByuserid(Usuario user);
 
 
 }
