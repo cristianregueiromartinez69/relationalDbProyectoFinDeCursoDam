@@ -4,10 +4,7 @@ import com.finproyectodam.relationaldb.model.dto.PlaylistDTO;
 import com.finproyectodam.relationaldb.model.entitys.Playlist;
 import com.finproyectodam.relationaldb.playlist.service.PlayListService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/relationaldb/spotify/playlist")
@@ -27,5 +24,21 @@ public class PlayListRestController {
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    /**
+     * Metodo post para añadir una cancion a una playlist
+     * @param playlistId el id de la playlist
+     * @param cancionId el id de la cancion
+     * @return un mensaje diciendo de si se añadio o no la cancion
+     */
+    @PostMapping("/{playlistId}/cancion/{cancionId}")
+    public ResponseEntity<String> addCancionPlaylistController(@PathVariable Integer playlistId, @PathVariable Integer cancionId) {
+        try{
+            playListService.addSongPlayList(playlistId, cancionId);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok("Cancion añadida a la playlist correctamente");
     }
 }
