@@ -106,6 +106,21 @@ public class PlayListService {
         return userPlaylist.getEmail().equals(userLoggin.getEmail());
     }
 
+
+    public Playlist getPlaylistByIdAndUserService(Integer playlistId, Usuario user){
+        if(checkUserLoggingAddSong(playlistId)){
+            return playListsRepository.findByidAndUserid(playlistId, user);
+        }
+        else{
+            throw new RuntimeException("Usuario no logueado, fuera hacker!!");
+        }
+    }
+
+    /**
+     * Metodo que devuelve el objeto del usuario logueado
+     * @param logginUsers el hasmap de usuarios logueados
+     * @return el usuario o null
+     */
     public Usuario getCurrentUser(ConcurrentHashMap<String, String> logginUsers){
 
         for(String usuario : logginUsers.keySet()){
