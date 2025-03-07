@@ -128,11 +128,20 @@ public class PlayListService {
         }
     }
 
+    /**
+     * Metodo de borrado de playlist por id
+     * @param playlistId el id de la playlist
+     */
+    @Transactional
     public void deletePlaylistByIdService(Integer playlistId){
         Usuario userAuthenticator = getCurrentUser(usersTokens.getUserTokens());
         if(checkUserLoggingAddSong(playlistId)){
-
+            Playlist playlist = playListsRepository.findByidAndUserid(playlistId, userAuthenticator);
+            playlistCancionRepository.deleteByplaylist(playlist);
             playListsRepository.deleteByidAndUserid(playlistId, userAuthenticator);
+        }
+        else{
+            throw new LoginUserExcepcion("Usuario no logueado, fuera hacker!!");
         }
     }
 
