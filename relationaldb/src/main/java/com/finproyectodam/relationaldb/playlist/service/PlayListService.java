@@ -1,5 +1,7 @@
 package com.finproyectodam.relationaldb.playlist.service;
 
+import com.finproyectodam.relationaldb.excepciones.playlist.IdExcepction;
+import com.finproyectodam.relationaldb.excepciones.usuarios.LoginUserExcepcion;
 import com.finproyectodam.relationaldb.model.dto.PlaylistDTO;
 import com.finproyectodam.relationaldb.model.entitys.*;
 import com.finproyectodam.relationaldb.repository.CancionesRepository;
@@ -76,7 +78,7 @@ public class PlayListService {
             playlistCancionRepository.save(playlistCancion);
         }
         else{
-            throw new RuntimeException("Usuario no logueado, fuera hacker!!");
+            throw new LoginUserExcepcion("Usuario no logueado, fuera hacker!!");
         }
     }
 
@@ -87,7 +89,7 @@ public class PlayListService {
     public List<Playlist> getAllPlaylistService(){
         Usuario userAuthenticator = getCurrentUser(usersTokens.getUserTokens());
         if(userAuthenticator == null){
-            throw new RuntimeException("Usuario no logueado, fuera hacker!!");
+            throw new LoginUserExcepcion("Usuario no logueado, fuera hacker!!");
         }
         return playListsRepository.findByUserid(userAuthenticator);
     }
@@ -107,12 +109,22 @@ public class PlayListService {
     }
 
 
+    /**
+     * Metodo para que el usuario obtenga una playlist propia por id
+     * @param playlistId el id de la playlist
+     * @param user el usuario logueado
+     * @return la playlist o null
+     */
     public Playlist getPlaylistByIdAndUserService(Integer playlistId, Usuario user){
         if(checkUserLoggingAddSong(playlistId)){
-            return playListsRepository.findByidAndUserid(playlistId, user);
+           Playlist playlist = playListsRepository.findByidAndUserid(playlistId, user);
+            if(playlist == null){
+                throw new IdExcepction("Este id es desconocido");
+            }
+            return playlist;
         }
         else{
-            throw new RuntimeException("Usuario no logueado, fuera hacker!!");
+            throw new LoginUserExcepcion("Usuario no logueado, fuera hacker!!");
         }
     }
 
