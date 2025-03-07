@@ -13,12 +13,6 @@ import java.util.List;
  */
 public interface PlayListsRepository extends JpaRepository<Playlist, Integer> {
 
-    /**
-     * Metodo para encontrar una playList por id
-     * @param id el id de la PlayList
-     * @return la playList o null
-     */
-    Playlist findByid(Integer id);
 
     /**
      * Metodo para devolver todas las playList del usuario logueado
@@ -27,4 +21,11 @@ public interface PlayListsRepository extends JpaRepository<Playlist, Integer> {
     List<Playlist> findByUserid(Usuario user);
 
 
+    /**
+     * Metodo para devolver una playlist del usuario autenticado
+     * @param id el is a buscar
+     * @param user el usuario logueado
+     * @return la playlist o null
+     */
+    Playlist findByidAndUserid(Integer id, Usuario user);
 }
