@@ -5,13 +5,15 @@ import com.finproyectodam.relationaldb.repository.UsuariosRepository;
 import com.finproyectodam.relationaldb.excepciones.usuarios.LoginUserExcepcion;
 import org.springframework.stereotype.Service;
 
+import java.net.http.HttpHeaders;
+
 /**
  * Servicio de login de usuarios
  * @author cristian && Joel
  * @version 1.0
  */
 @Service
-public class LoginUsuarioService {
+public class LoginUsuarioService{
 
     private final UsuariosRepository usuariosRepository;
 
@@ -55,5 +57,7 @@ public class LoginUsuarioService {
     public boolean checkExistsPassword(String password){
         return usuariosRepository.findByPasswordU(password).isPresent();
     }
+
+
 
 }

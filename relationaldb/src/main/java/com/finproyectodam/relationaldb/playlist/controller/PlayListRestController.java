@@ -1,0 +1,102 @@
+package com.finproyectodam.relationaldb.playlist.controller;
+
+import com.finproyectodam.relationaldb.model.dto.PlaylistDTO;
+import com.finproyectodam.relationaldb.model.entitys.Playlist;
+import com.finproyectodam.relationaldb.playlist.service.PlayListService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/relationaldb/spotify/playlist")
+public class PlayListRestController {
+
+    private final PlayListService playListService;
+
+    public PlayListRestController(PlayListService playListService) {
+        this.playListService = playListService;
+    }
+
+    @PostMapping("/crear")
+    public ResponseEntity<String> savePlayListController(@RequestBody PlaylistDTO playlistDTO) {
+        try{
+            playListService.savePlayList(playlistDTO);
+            return ResponseEntity.ok("Playlist creada correctamente");
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    /**
+     * Metodo post para añadir una cancion a una playlist
+     * @param playlistId el id de la playlist
+     * @param cancionId el id de la cancion
+     * @return un mensaje diciendo de si se añadio o no la cancion
+     */
+    @PostMapping("/{playlistId}/cancion/{cancionId}")
+    public ResponseEntity<String> addCancionPlaylistController(@PathVariable Integer playlistId, @PathVariable Integer cancionId) {
+        try{
+            playListService.addSongPlayList(playlistId, cancionId);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok("Cancion añadida a la playlist correctamente");
+    }
+
+    /**
+     * Metodo para obtener todas las playlist que sean del usuario logueado
+     * @return la lista de playlist o null
+     */
+    @GetMapping("/info")
+    public ResponseEntity<List<Playlist>> getPlaylistController() {
+        try{
+            List<Playlist> playlistList = playListService.getAllPlaylistService();
+            return ResponseEntity.ok(playlistList);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+    @GetMapping("/info/{id}")
+    public ResponseEntity<Playlist> getPlaylistByIdAndUserController(@PathVariable Integer id) {
+        try{
+            Playlist playlist = playListService.getPlaylistByIdAndUserService(id);
+            return ResponseEntity.ok(playlist);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+    /**
+     * Metodo delete para eliminar una playlist por el id
+     * @param id el id de la playlist
+     * @return un mensaje indicando si se elimino o no la playlist
+     */
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deletePlaylistByIdController(@PathVariable Integer id) {
+        try{
+            playListService.deletePlaylistByIdService(id);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok("Playlist eliminada correctamente");
+    }
+
+    /**
+     * Metodo delete para eliminar una cancion de la playlist
+     * @param playlistId el id de la playlist
+     * @param cancionId el id de la cancion
+     * @return un mensaje diciendo si se elimino o no
+     */
+    @DeleteMapping("/delete/{playlistId}/cancion/{cancionId}")
+    public ResponseEntity<String> deleteCancionPlaylistByIdController(@PathVariable Integer playlistId, @PathVariable Integer cancionId) {
+        try{
+            playListService.deleteSongPlayListService(playlistId, cancionId);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok("Cancion eliminada correctamente de la playlist");
+    }
+
+}

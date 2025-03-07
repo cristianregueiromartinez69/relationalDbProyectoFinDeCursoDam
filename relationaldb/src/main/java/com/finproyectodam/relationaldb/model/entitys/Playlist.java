@@ -52,10 +52,11 @@ public class Playlist {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "userid", nullable = false)
     @JsonBackReference
+    @JsonIgnore
     private Usuario userid;
 
     //relacion muchos a muchos con canciones
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "playlist_cancion",
             joinColumns = @JoinColumn(name = "playlist_id"),
             inverseJoinColumns = @JoinColumn(name = "cancion_id"))
@@ -97,6 +98,12 @@ public class Playlist {
         this.fechacre = fechacre;
         this.descrip = descrip;
         this.userid = userid;
+    }
+
+    public Playlist(String titulo, LocalDate fechacre, String descrip) {
+        this.titulo = titulo;
+        this.fechacre = fechacre;
+        this.descrip = descrip;
     }
 
     //getter y setter

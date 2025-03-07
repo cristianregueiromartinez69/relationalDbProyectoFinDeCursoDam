@@ -1,12 +1,7 @@
 package com.finproyectodam.relationaldb.model.dto;
 
-import com.finproyectodam.relationaldb.model.entitys.Cancion;
-import com.finproyectodam.relationaldb.model.entitys.Usuario;
-
-
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Set;
+
 
 /**
  * Clase dto de playlist
@@ -20,8 +15,7 @@ public class PlaylistDTO {
     private String titulo;
     private LocalDate fechacre;
     private String descrip;
-    private Usuario userid;
-    private Set<Cancion> canciones = new LinkedHashSet<>();
+
 
     public PlaylistDTO() {
     }
@@ -32,32 +26,21 @@ public class PlaylistDTO {
      * @param titulo el titulo de la playlist
      * @param fechacre la fecha de creacion de la playlist
      * @param descrip la descripcion de la playlist
-     * @param userid el usuario al que pertenece la playlist
-     * @param canciones las canciones de la playlist
      */
-    public PlaylistDTO(Integer id, String titulo, LocalDate fechacre, String descrip, Usuario userid, Set<Cancion> canciones) {
+    public PlaylistDTO(Integer id, String titulo, LocalDate fechacre, String descrip) {
         this.id = id;
         this.titulo = titulo;
         this.fechacre = fechacre;
         this.descrip = descrip;
-        this.userid = userid;
-        this.canciones = canciones;
     }
 
-    public PlaylistDTO(String titulo, LocalDate fechacre, String descrip, Usuario userid, Set<Cancion> canciones) {
+    public PlaylistDTO(String titulo, LocalDate fechacre, String descrip) {
         this.titulo = titulo;
         this.fechacre = fechacre;
         this.descrip = descrip;
-        this.userid = userid;
-        this.canciones = canciones;
     }
 
-    public PlaylistDTO(String titulo, LocalDate fechacre, String descrip, Usuario userid) {
-        this.titulo = titulo;
-        this.fechacre = fechacre;
-        this.descrip = descrip;
-        this.userid = userid;
-    }
+
 
     /**
      * getter y setter de la clase
@@ -95,20 +78,6 @@ public class PlaylistDTO {
         this.descrip = descrip;
     }
 
-    public Usuario getUserid() {
-        return userid;
-    }
 
-    public void setUserid(Usuario userid) {
-        this.userid = userid;
-    }
-
-    public Set<Cancion> getCanciones() {
-        return canciones;
-    }
-
-    public void setCanciones(Set<Cancion> canciones) {
-        this.canciones = canciones;
-    }
 
 }
