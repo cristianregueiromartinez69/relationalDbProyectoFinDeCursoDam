@@ -30,8 +30,9 @@ public interface PlayListsRepository extends JpaRepository<Playlist, Integer> {
     Playlist findByidAndUserid(Integer id, Usuario user);
 
     /**
-     * Metodo para borrar una playlist por is
+     * Metodo para borrar una playlist por id y usuario autenticado
      * @param id el id de la playlist
+     * @param user el usuario logueado
      */
-    void deleteByid(Integer id);
+    void deleteByidAndUserid(Integer id, Usuario user);
 }

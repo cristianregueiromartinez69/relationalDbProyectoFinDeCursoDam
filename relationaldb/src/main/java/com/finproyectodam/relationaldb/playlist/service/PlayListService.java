@@ -128,6 +128,14 @@ public class PlayListService {
         }
     }
 
+    public void deletePlaylistByIdService(Integer playlistId){
+        Usuario userAuthenticator = getCurrentUser(usersTokens.getUserTokens());
+        if(checkUserLoggingAddSong(playlistId)){
+
+            playListsRepository.deleteByidAndUserid(playlistId, userAuthenticator);
+        }
+    }
+
     /**
      * Metodo que devuelve el objeto del usuario logueado
      * @param logginUsers el hasmap de usuarios logueados
