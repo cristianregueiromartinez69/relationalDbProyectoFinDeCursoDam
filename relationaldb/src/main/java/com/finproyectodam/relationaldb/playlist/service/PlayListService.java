@@ -149,6 +149,36 @@ public class PlayListService {
         }
     }
 
+    /**
+     * Metodo para borrar una cancion de una playlist
+     * @param playlistId el id de la playlist
+     * @param cancionId el id de la cancion
+     */
+    @Transactional
+    public void deleteSongPlayListService(Integer playlistId, Integer cancionId){
+        Usuario userAuthenticator = getCurrentUser(usersTokens.getUserTokens());
+        if(checkUserLoggingAddSong(playlistId)){
+            Playlist playlist = playListsRepository.findByidAndUserid(playlistId, userAuthenticator);
+            Cancion cancion = cancionesRepository.findByid(cancionId);
+
+            if(playlist == null){
+                throw new IdExcepction("Playlist inexistente");
+            }
+            if(cancion == null){
+                throw new IdExcepction("Cancion inexistente");
+            }
+
+            if(!playlist.getCanciones().contains(cancion)){
+                throw new IdExcepction("Cancion inexistente para borrar en la playlist");
+            }
+            else{
+                playlist.getCanciones().remove(cancion);
+                playListsRepository.save(playlist);
+                playlistCancionRepository.deleteByplaylistAndCancion(playlist, cancion);
+            }
+        }
+    }
+
 
     /**
      * Metodo que devuelve el objeto del usuario logueado
