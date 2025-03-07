@@ -15,6 +15,6 @@ public class RelationaldbApplication {
 		SpringApplication.run(RelationaldbApplication.class, args);
 	}
 
-	//TODO: vamos a eliminar canciones de playlist
+
 
 }
