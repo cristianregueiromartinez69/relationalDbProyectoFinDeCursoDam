@@ -56,7 +56,7 @@ public class Playlist {
     private Usuario userid;
 
     //relacion muchos a muchos con canciones
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "playlist_cancion",
             joinColumns = @JoinColumn(name = "playlist_id"),
             inverseJoinColumns = @JoinColumn(name = "cancion_id"))
