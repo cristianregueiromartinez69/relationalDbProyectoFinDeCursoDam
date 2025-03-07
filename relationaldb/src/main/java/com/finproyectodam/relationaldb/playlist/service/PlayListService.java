@@ -112,12 +112,12 @@ public class PlayListService {
     /**
      * Metodo para que el usuario obtenga una playlist propia por id
      * @param playlistId el id de la playlist
-     * @param user el usuario logueado
      * @return la playlist o null
      */
-    public Playlist getPlaylistByIdAndUserService(Integer playlistId, Usuario user){
+    public Playlist getPlaylistByIdAndUserService(Integer playlistId){
+        Usuario userAuthenticator = getCurrentUser(usersTokens.getUserTokens());
         if(checkUserLoggingAddSong(playlistId)){
-           Playlist playlist = playListsRepository.findByidAndUserid(playlistId, user);
+           Playlist playlist = playListsRepository.findByidAndUserid(playlistId, userAuthenticator);
             if(playlist == null){
                 throw new IdExcepction("Este id es desconocido");
             }

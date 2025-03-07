@@ -51,9 +51,18 @@ public class PlayListRestController {
     @GetMapping("/info")
     public ResponseEntity<List<Playlist>> getPlaylistController() {
         try{
-            System.out.println("llegue");
             List<Playlist> playlistList = playListService.getAllPlaylistService();
             return ResponseEntity.ok(playlistList);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+    @GetMapping("/info/{id}")
+    public ResponseEntity<Playlist> getPlaylistByIdAndUserController(@PathVariable Integer id) {
+        try{
+            Playlist playlist = playListService.getPlaylistByIdAndUserService(id);
+            return ResponseEntity.ok(playlist);
         }catch (Exception e){
             return ResponseEntity.badRequest().body(null);
         }
