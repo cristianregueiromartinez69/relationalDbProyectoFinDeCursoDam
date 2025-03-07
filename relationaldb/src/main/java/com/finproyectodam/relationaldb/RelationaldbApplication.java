@@ -15,6 +15,6 @@ public class RelationaldbApplication {
 		SpringApplication.run(RelationaldbApplication.class, args);
 	}
 
-	//TODO: obteniendo playlist por id hecho
+	//TODO: vamos a hacer borrado de playlist por id
 
 }
