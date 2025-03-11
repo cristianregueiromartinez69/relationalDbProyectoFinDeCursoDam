@@ -36,4 +36,13 @@ public class CancionesService {
         }
         return cancionList;
     }
+
+    /**
+     * Metodo para obtener una cancion de la base de datos por el id
+     * @param id el id de la cancion
+     * @return la cancion o null
+     */
+    public Cancion getCancionByIdService(Integer id){
+        return cancionesRepository.findByid(id);
+    }
 }
