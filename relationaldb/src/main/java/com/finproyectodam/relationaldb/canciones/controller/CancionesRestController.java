@@ -4,6 +4,7 @@ import com.finproyectodam.relationaldb.canciones.service.CancionesService;
 import com.finproyectodam.relationaldb.model.entitys.Cancion;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,4 +48,25 @@ public class CancionesRestController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    /**
+     * Metodo GET para obtener cancion por el id
+     * @param id el id de la cancion
+     * @return el objeto cancion o null
+     */
+    @GetMapping("/info/{id}")
+    public ResponseEntity<Cancion> getSongsByIdRestController(@PathVariable Integer id) {
+        try{
+            Cancion cancion = cancionesService.getCancionByIdService(id);
+            if(cancion != null) {
+                return ResponseEntity.ok(cancion);
+            }
+            else{
+                return ResponseEntity.notFound().build();
+            }
+        }catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
