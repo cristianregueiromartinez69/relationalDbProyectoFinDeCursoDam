@@ -54,7 +54,7 @@ public class CancionesRestController {
      * @param id el id de la cancion
      * @return el objeto cancion o null
      */
-    @GetMapping("/info/{id}")
+    @GetMapping("/info/id/{id}")
     public ResponseEntity<Cancion> getSongsByIdRestController(@PathVariable Integer id) {
         try{
             Cancion cancion = cancionesService.getCancionByIdService(id);
