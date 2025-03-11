@@ -17,8 +17,6 @@ public class RelationaldbApplication {
 
 /*
 	TODO con las canciones:
-	1. listar todas las canciones
-	2. listar por id
 	3. listar por nombre
 	4. controlar pausa, play, adelante y atras
 	 */
