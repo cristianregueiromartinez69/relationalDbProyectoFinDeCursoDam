@@ -45,4 +45,13 @@ public class CancionesService {
     public Cancion getCancionByIdService(Integer id){
         return cancionesRepository.findByid(id);
     }
+
+    /**
+     * Metodo para obtener del repositorio una lista de canciones por titulo
+     * @param titulo el titulo de la cancion
+     * @return la cancion, canciones o null
+     */
+    public List<Cancion> getCancionesByTituloService(String titulo){
+        return cancionesRepository.findBytitulo(titulo);
+    }
 }
