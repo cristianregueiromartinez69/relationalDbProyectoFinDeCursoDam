@@ -2,6 +2,7 @@ package com.finproyectodam.relationaldb.canciones.controller;
 
 import com.finproyectodam.relationaldb.canciones.service.CancionesService;
 import com.finproyectodam.relationaldb.model.entitys.Cancion;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -68,5 +69,26 @@ public class CancionesRestController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    /**
+     * Metodo Get para obtener una cancion o canciones por titulo
+     * @param titulo el titulo de la cancion
+     * @return la cancion o lista de canciones por titulo
+     */
+    @GetMapping("/info/titulo/{titulo}")
+    public ResponseEntity<List<Cancion>> getSongsByTituloRestController(@PathVariable String titulo) {
+        try{
+            List<Cancion> cancionList = cancionesService.getCancionesByTituloService(titulo);
+            if(cancionList != null) {
+                return ResponseEntity.ok(cancionList);
+            }
+            else{
+                return ResponseEntity.notFound().build();
+            }
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
 
 }
