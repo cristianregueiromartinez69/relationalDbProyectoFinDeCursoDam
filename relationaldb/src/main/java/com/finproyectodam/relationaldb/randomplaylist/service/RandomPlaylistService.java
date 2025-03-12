@@ -1,9 +1,8 @@
 package com.finproyectodam.relationaldb.randomplaylist.service;
 
-import com.finproyectodam.relationaldb.excepciones.playlist.IdExcepction;
+import com.finproyectodam.relationaldb.excepciones.playlist.PlaylistNotFoundException;
 import com.finproyectodam.relationaldb.excepciones.usuarios.LoginUserExcepcion;
 import com.finproyectodam.relationaldb.model.entitys.Playlist;
-import com.finproyectodam.relationaldb.model.entitys.PlaylistCancion;
 import com.finproyectodam.relationaldb.model.entitys.Usuario;
 import com.finproyectodam.relationaldb.playlist.service.PlayListService;
 import com.finproyectodam.relationaldb.repository.PlayListsRepository;
@@ -57,6 +56,9 @@ public class RandomPlaylistService {
         List<Playlist> userPlaylist = userPlaylistService();
         sumAllPlaylist(adminPlaylists, userPlaylist);
 
+        if(adminPlaylists.isEmpty()) {
+            throw new PlaylistNotFoundException("No hay nada en esta playlist");
+        }
 
         int sizePlaylist = adminPlaylists.size();
         int numRandom = (int)(Math.random() * sizePlaylist);
