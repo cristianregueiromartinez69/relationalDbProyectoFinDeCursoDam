@@ -11,6 +11,7 @@ import com.finproyectodam.relationaldb.repository.UsuariosRepository;
 import com.finproyectodam.relationaldb.usuarios.token.UsersTokens;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,12 +48,18 @@ public class RandomPlaylistService {
      * @return la playlist recibida
      */
     public Playlist getRandomPlaylist() {
-        List<Playlist> adminPlaylists = userPlaylistService();
-        List<Playlist> userPlaylist = getAllAdminPlaylists();
+        List<Playlist> adminPlaylists = getAllAdminPlaylists();
+
+        if(adminPlaylists == null) {
+            adminPlaylists = new ArrayList<>();
+        }
+
+        List<Playlist> userPlaylist = userPlaylistService();
         sumAllPlaylist(adminPlaylists, userPlaylist);
-        assert adminPlaylists != null;
+
+
         int sizePlaylist = adminPlaylists.size();
-        int numRandom = (int)(Math.random() * sizePlaylist) + 1;
+        int numRandom = (int)(Math.random() * sizePlaylist);
         return adminPlaylists.get(numRandom);
     }
 
@@ -62,7 +69,7 @@ public class RandomPlaylistService {
      * @param userPlaylist la playlist del usuario
      */
     private void sumAllPlaylist(List<Playlist> adminPlaylist, List<Playlist> userPlaylist){
-        if(!userPlaylist.isEmpty()){
+        if(userPlaylist != null && !userPlaylist.isEmpty()){
             adminPlaylist.addAll(userPlaylist);
         }
     }
