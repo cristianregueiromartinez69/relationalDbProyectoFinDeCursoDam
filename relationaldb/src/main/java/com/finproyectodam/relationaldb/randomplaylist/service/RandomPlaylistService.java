@@ -28,7 +28,8 @@ public class RandomPlaylistService {
     }
 
     private List<Playlist> getAllAdminPlaylists() {
-        List<Playlist> playlists = new ArrayList<>();
+        Usuario usuarioAdmin = usuariosRepository.findByid(ID_USER_ADMIN_RANDOM_PLAYLIST);
+        return playlistsRepository.findByUserid(usuarioAdmin);
     }
 
 
