@@ -15,6 +15,12 @@ import java.util.Optional;
 @Repository
 public interface UsuariosRepository extends JpaRepository<Usuario, Integer> {
 
+    /**
+     * Busqueda de un usuario por su id
+     * @param id el id del usuario
+     * @return el usuario a devolver por id
+     */
+    Usuario findByid(Integer id);
     //encontrar a un usuario por alias
     @EntityGraph(attributePaths = {"playlists"})
     Optional<Usuario> findByUsername(String nombre);
