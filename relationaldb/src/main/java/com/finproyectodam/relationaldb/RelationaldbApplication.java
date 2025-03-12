@@ -15,10 +15,6 @@ public class RelationaldbApplication {
 		SpringApplication.run(RelationaldbApplication.class, args);
 	}
 
-/*
-	TODO con las canciones:
-	3. listar por nombre
-	4. controlar pausa, play, adelante y atras
-	 */
+	//TODO: hacer que al entrar salga una playlist aleatoria
 
 }
