@@ -1,7 +1,9 @@
 package com.finproyectodam.relationaldb.albumes.info.Service;
 
 import com.finproyectodam.relationaldb.model.entitys.Album;
+import com.finproyectodam.relationaldb.model.entitys.Artista;
 import com.finproyectodam.relationaldb.repository.AlbumesRepository;
+import com.finproyectodam.relationaldb.repository.ArtistasRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

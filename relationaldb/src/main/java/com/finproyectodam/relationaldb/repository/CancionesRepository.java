@@ -1,8 +1,9 @@
 package com.finproyectodam.relationaldb.repository;
 
 import com.finproyectodam.relationaldb.model.entitys.Cancion;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
 
 
 /**
@@ -18,4 +19,12 @@ public interface CancionesRepository extends JpaRepository<Cancion, Integer> {
      * @return la cancion o null
      */
     Cancion findByid(Integer id);
+
+    /**
+     * Metodo para obtener una cancion o canciones por titulo
+     * @param nombre el nombre de la cancion
+     * @return la lista de canciones
+     */
+    List<Cancion> findBytitulo(String nombre);
+
 }
