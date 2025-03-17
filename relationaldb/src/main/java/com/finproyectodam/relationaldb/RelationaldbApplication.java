@@ -15,6 +15,6 @@ public class RelationaldbApplication {
 		SpringApplication.run(RelationaldbApplication.class, args);
 	}
 
-	//TODO: hacer que al entrar salga una playlist aleatoria
+	//TODO: guardado de cancion en el historial
 
 }
