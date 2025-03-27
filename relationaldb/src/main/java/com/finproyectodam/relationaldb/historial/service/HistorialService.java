@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class HistorialService {
 
     //atributos de clase
-    private final RedisTemplate<Integer, Object> redisTemplate;
+    private final RedisTemplate<Integer, Integer> redisTemplate;
     private final PlayListService playListService;
     private final UsersTokens usersTokens;
 
@@ -26,7 +26,7 @@ public class HistorialService {
      * @param redisTemplate el servicio de redis
      * @param playListService el servicio de playlist
      */
-    public HistorialService(RedisTemplate<Integer, Object> redisTemplate, PlayListService playListService) {
+    public HistorialService(RedisTemplate<Integer, Integer> redisTemplate, PlayListService playListService) {
         this.redisTemplate = redisTemplate;
         this.playListService = playListService;
         this.usersTokens = new UsersTokens();
