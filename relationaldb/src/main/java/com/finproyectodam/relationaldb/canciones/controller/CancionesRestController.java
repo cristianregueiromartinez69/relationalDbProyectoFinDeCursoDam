@@ -1,13 +1,11 @@
 package com.finproyectodam.relationaldb.canciones.controller;
 
 import com.finproyectodam.relationaldb.canciones.service.CancionesService;
+import com.finproyectodam.relationaldb.historial.service.HistorialService;
 import com.finproyectodam.relationaldb.model.entitys.Cancion;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,13 +20,15 @@ public class CancionesRestController {
 
     //servicio de las canciones
     private final CancionesService cancionesService;
+    private final HistorialService historialService;
 
     /**
      * Constructor de la clase
      * @param cancionesService el servicio de las canciones
      */
-    public CancionesRestController(CancionesService cancionesService) {
+    public CancionesRestController(CancionesService cancionesService, HistorialService historialService) {
         this.cancionesService = cancionesService;
+        this.historialService = historialService;
     }
 
     /**
@@ -88,6 +88,16 @@ public class CancionesRestController {
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
+    }
+
+    @PostMapping("/play/id/{idCancion}")
+    public ResponseEntity<String> saveCancionHistorialRestController(@PathVariable Integer idCancion) {
+        try{
+            historialService.saveSongHistorial(idCancion);
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body("Nueva cancion en el historial");
     }
 
 
