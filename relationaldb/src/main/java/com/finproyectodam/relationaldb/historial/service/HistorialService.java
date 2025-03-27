@@ -1,7 +1,6 @@
 package com.finproyectodam.relationaldb.historial.service;
 
 import com.finproyectodam.relationaldb.excepciones.usuarios.LoginUserExcepcion;
-import com.finproyectodam.relationaldb.model.dto.UsuarioDTO;
 import com.finproyectodam.relationaldb.model.entitys.Usuario;
 import com.finproyectodam.relationaldb.playlist.service.PlayListService;
 import com.finproyectodam.relationaldb.usuarios.token.UsersTokens;
